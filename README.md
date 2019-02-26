@@ -168,7 +168,7 @@ on the library were built with.
     cmake --build .
     cmake --install 
     cd build
-    sudo make install #should work for linux and mac ox, will copy headers files into /usr/local/include 
+    sudo make install #should work for linux and mac ox, will copy headers files into /usr/local/include/mach7 
 
  Version 3.2 is needed in order to be able to have support of target_compile_features for AppleClang
 

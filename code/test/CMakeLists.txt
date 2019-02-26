@@ -37,4 +37,4 @@ install(EXPORT Mach7Targets DESTINATION lib/cmake/Mach7)
 install(FILES
     "${PROJECT_BINARY_DIR}/Mach7Config.cmake"
     DESTINATION lib/cmake/Mach7)
-install(DIRECTORY /home/firstlove/fork/Mach7/code/mach7/ DESTINATION include)
+install(DIRECTORY /home/firstlove/fork/Mach7/code/mach7/ DESTINATION include/mach7)
