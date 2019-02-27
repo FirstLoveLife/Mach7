@@ -744,14 +744,19 @@ template<>                        struct target_disambiguator<int>    { typedef 
         XTL_CPP0X_TYPENAME switch_traits::local_data_type  local_data;         \
         bool processed = false;                                       \
         size_t jump_target = switch_traits::choose(subject_ptr,static_data,local_data); \
-        XTL_CONCAT(ReMatch,__LINE__):                                          \
+	while (true)  								\
+	{ 									\
+	    bool continue_flag = false; \
         switch (jump_target)                                                   \
         {                                                                      \
             XTL_NON_REDUNDANCY_ONLY(default:)                                  \
             { XTL_REDUNDANCY_ONLY(try){{                                       \
             if (switch_traits::on_default(jump_target,local_data,static_data)) \
-                goto XTL_CONCAT(ReMatch,__LINE__);                             \
-            XTL_SUBCLAUSE_FIRST
+	    { 									\
+		continue_flag = true; 						\
+		break; 								\
+	    } 									\
+            XTL_SUBCLAUSE_FIRST 
 
 /// Currently we have not found the way to distinguish all 3 possibilities 
 /// i.e. type, layout and declaration so we just define a different macro when
@@ -826,8 +831,11 @@ if (true) {
         enum { target_label = XTL_COUNTER-__base_counter };                    \
         if (!processed) switch_traits::on_end(subject_ptr, local_data, target_label); \
         case switch_traits::XTL_CPP0X_TEMPLATE CaseLabel<target_label>::exit: ; } \
-        XTL_WARNING_POP                                                        \
-        }
+	        XTL_WARNING_POP                                                        \
+	if (continue_flag == false) \
+		{break;} \
+	} \
+        } \
 
 //------------------------------------------------------------------------------
 
@@ -973,3 +981,4 @@ if (true) {
 #endif
 
 //------------------------------------------------------------------------------
+
