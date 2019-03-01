@@ -96,6 +96,7 @@ install:
 before_script:
     - uname -a
     - printenv
+    - cmake --version
     - which clang++
     - clang++ --version 2>&1 | grep clang
     - which g++
@@ -103,7 +104,8 @@ before_script:
     - $CXX --version
     - 
 script: 
-    - make --keep-going
+    - make --keep-going -j100
+    - cd ..
     - cmake -H.  -Bbuild 
     - cd build
     - sudo make install -j10
