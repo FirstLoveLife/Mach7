@@ -1,4 +1,8 @@
 language: cpp
+branches:
+  only:
+  - gh-pages
+  - /.*/
 os:
   - linux
   - osx
@@ -43,6 +47,7 @@ before_script:
     - which g++
     - g++ --version
     - $CXX --version
+    - xcode-select --install
 script: make --keep-going
 notifications:
   email:
